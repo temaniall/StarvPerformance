@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MainLayout from './layouts/MainLayout';
+import AdminLayout from './layouts/AdminLayout';
+
+import Home from './pages/Home';
+import Catalog from './pages/Catalog';
+import Cart from './pages/Cart';
+import LoginPage from './pages/LoginPage';
+import AdminOrders from './pages/AdminOrders';
+import AdminProducts from './pages/AdminProducts';
+import AdminServices from './pages/AdminServices';
+import Services from './pages/Services';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path="catalog" element={<Catalog />} />
+          <Route path="services" element={<Services />} />
+          <Route path="cart" element={<Cart />} />
+        </Route>
+
+        <Route path="/login" element={<LoginPage />} />
+
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="orders" element={<AdminOrders />} />
+          <Route path="products" element={<AdminProducts />} />
+          <Route path="services" element={<AdminServices />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
